@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="dao.Admin" table="admin" catalog="test">
+        <id name="idadmin" type="java.lang.Integer">
+            <column name="IDADMIN" />
+            <generator class="identity" />
+        </id>
+        <property name="emailuser" type="string">
+            <column name="EMAILUSER" length="30" not-null="true" />
+        </property>
+        <property name="login" type="string">
+            <column name="LOGIN" length="10" not-null="true" />
+        </property>
+        <property name="nomuser" type="string">
+            <column name="NOMUSER" length="15" not-null="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="PASSWORD" length="20" not-null="true" />
+        </property>
+        <property name="phoneuser" type="string">
+            <column name="PHONEUSER" length="15" not-null="true" />
+        </property>
+        <property name="prenomuser" type="string">
+            <column name="PRENOMUSER" length="15" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="dao.Client" table="client" catalog="test">
+        <id name="idclient" type="java.lang.Integer">
+            <column name="IDCLIENT" />
+            <generator class="identity" />
+        </id>
+        <property name="adresseclient" type="string">
+            <column name="ADRESSECLIENT" length="50" not-null="true" />
+        </property>
+        <property name="emailclient" type="string">
+            <column name="EMAILCLIENT" length="30" not-null="true" />
+        </property>
+        <property name="nomclient" type="string">
+            <column name="NOMCLIENT" length="15" not-null="true" />
+        </property>
+        <property name="phoneclient" type="string">
+            <column name="PHONECLIENT" length="15" not-null="true" />
+        </property>
+        <property name="prenomclient" type="string">
+            <column name="PRENOMCLIENT" length="15" not-null="true" />
+        </property>
+        <property name="login" type="string">
+            <column name="LOGIN" length="10" not-null="true" />
+        </property>
+        <property name="pssword" type="string">
+            <column name="PSSWORD" length="15" not-null="true" />
+        </property>
+        <set name="dossiers" table="dossier" cascade="delete" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDCLIENT" />
+            </key>
+            <one-to-many class="dao.Dossier" />
+        </set>
+    </class>
+</hibernate-mapping>

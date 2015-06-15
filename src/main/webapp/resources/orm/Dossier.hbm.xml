@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="dao.Dossier" table="dossier" catalog="test">
+        <id name="numdossier" type="java.lang.Integer">
+            <column name="NUMDOSSIER" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="client" class="dao.Client" fetch="select">
+            <column name="IDCLIENT" />
+        </many-to-one>
+        <many-to-one name="transporteur" class="dao.Transporteur" fetch="select">
+            <column name="IDTRANSPORTEUR" />
+        </many-to-one>
+        <many-to-one name="portByIdport" class="dao.Port" fetch="select">
+            <column name="IDPORT" />
+        </many-to-one>
+        <many-to-one name="portByPorIdport" class="dao.Port" fetch="select">
+            <column name="POR_IDPORT" />
+        </many-to-one>
+        <many-to-one name="moyennetransport" class="dao.Moyennetransport" fetch="select">
+            <column name="IDMOYENNETRANSPORT" not-null="true" />
+        </many-to-one>
+        <many-to-one name="transit" class="dao.Transit" fetch="select">
+            <column name="IDTRANSIT" />
+        </many-to-one>
+        <many-to-one name="commercial" class="dao.Commercial" fetch="select">
+            <column name="IDCOMMERCIAL" />
+        </many-to-one>
+        <property name="cotation" type="java.lang.Double">
+            <column name="COTATION" precision="22" scale="0" />
+        </property>
+        <property name="date" type="date">
+            <column name="DATE" length="10" not-null="true" />
+        </property>
+        <property name="etat" type="string">
+            <column name="ETAT" not-null="true" />
+        </property>
+        <property name="incoter" type="string">
+            <column name="INCOTER" length="5" not-null="true" />
+        </property>
+        <property name="typetransport" type="string">
+            <column name="TYPETRANSPORT" length="15" not-null="true" />
+        </property>
+        <property name="fintransport" type="java.lang.Boolean">
+            <column name="FINTRANSPORT" />
+        </property>
+        <property name="validationclient" type="java.lang.Boolean">
+            <column name="VALIDATIONCLIENT" />
+        </property>
+    </class>
+</hibernate-mapping>

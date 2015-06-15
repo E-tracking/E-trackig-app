@@ -1,0 +1,181 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/test" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mappingResources">
+			<list>
+				<value>orm/Users.hbm.xml</value>
+				<value>orm/UserRoles.hbm.xml</value>
+				<value>orm/Admin.hbm.xml</value>
+				<value>orm/Client.hbm.xml</value>
+				<value>orm/Commercial.hbm.xml</value>
+				<value>orm/Dossier.hbm.xml</value>
+				<value>orm/Moyennetransport.hbm.xml</value>
+				<value>orm/Pays.hbm.xml</value>
+				<value>orm/Port.hbm.xml</value>
+				<value>orm/Transit.hbm.xml</value>
+				<value>orm/Transporteur.hbm.xml</value>
+				<value>orm/Etat.hbm.xml</value>
+				<value>orm/Comment.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<!-- <prop key="hibernate.show_sql">true</prop> -->
+				<prop key="hibernate.enable_lazy_load_no_trans">true</prop>
+				<prop key="hibernate.hbm2ddl.auto" >update</prop>
+				<prop key="connection.release_mode">auto</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="userDao" class="com.mkyong.users.dao.UserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+
+	<bean id="myUserDetailsService" class="com.mkyong.users.service.MyUserDetailsService">
+		<property name="userDao" ref="userDao" />
+	</bean>
+	
+	<bean id="appcontroller" class="controle.AppController">
+		<property name="userDao" ref="userDao" />
+		<property name="userRoleDao" ref="userRoleDao" />
+	</bean>
+	
+	<bean id="transitcontroller" class="controle.TransitController">
+		<property name="userDao" ref="userDao" />
+	</bean>
+	
+	<bean id="commercialtcontroller" class="controle.CommercialController">
+		<property name="userDao" ref="userDao" />
+	</bean>
+	
+	<bean id="admincontroller" class="controle.AdminController">
+		<property name="userDao" ref="userDao" />
+	</bean>
+
+	<bean id="userRoleDao" class="com.mkyong.users.dao.UserRoleDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+		<bean class="dao.CommercialImpl" id="Commercialdao" init-method="init">
+			<property name="sessionFactory" ref="sessionFactory" />
+		</bean>
+		<bean class="dao.TransitImpl" id="Transitdao" init-method="init">
+			<property name="sessionFactory" ref="sessionFactory" />
+		</bean>
+		<bean class="dao.AdminImpl" id="Admindao" init-method="init">
+			<property name="sessionFactory" ref="sessionFactory" />
+		</bean>
+		<bean class="dao.TransporteurImpl" id="Transporteurdao" init-method="init">
+			<property name="sessionFactory" ref="sessionFactory" />
+		</bean>
+		<bean class="dao.DossierImpl" id="Dossierdao" init-method="init">
+			<property name="sessionFactory" ref="sessionFactory" />
+		</bean>
+		<bean class="dao.ClientImpl" id="Clientdao" init-method="init">
+			<property name="sessionFactory" ref="sessionFactory" />
+		</bean>
+		<bean class="dao.PaysImpl" id="Paysdao" init-method="init">
+			<property name="sessionFactory" ref="sessionFactory" />
+		</bean>
+		<bean class="dao.PortImpl" id="Portdao" init-method="init">
+			<property name="sessionFactory" ref="sessionFactory" />
+		</bean>
+		<bean class="dao.MoyennetransportImpl" id="Moyennetransportdao" init-method="init">
+			<property name="sessionFactory" ref="sessionFactory" />
+		</bean>
+		<bean class="dao.EtatDaoImpl" id="Etatdao">
+			<property name="sessionFactory" ref="sessionFactory" />
+		</bean>
+		<bean class="dao.CommentImpl" id="CommentDao">
+			<property name="sessionFactory" ref="sessionFactory" />
+		</bean>
+		<!-- ****************** -->
+		<bean class="service.CommercialServiceImpl" id="Servicedao">
+			<property name="dao" ref="Commercialdao"></property> 
+			<property name="userdao" ref="userDao" ></property>
+		</bean>
+		<bean class="service.TransitServiceImpl" id="Servicedao2">
+			<property name="dao" ref="Transitdao"></property> 
+			<property name="userdao" ref="userDao" ></property>
+		</bean>
+		<bean class="service.AdminServiceImpl" id="Servicedao3">
+			<property name="dao" ref="Admindao"></property> 
+		</bean>
+		<bean class="service.TransporteurServiceImpl" id="Servicedao4">
+			<property name="dao" ref="Transporteurdao"></property> 
+			<property name="userdao" ref="userDao" ></property>
+		</bean>
+		<bean class="service.DossierServiceImpl" id="Servicedao5">
+			<property name="dao" ref="Dossierdao"></property>
+			<property name="daoC" ref="Commercialdao"></property>
+			<property name="daoT" ref="Transitdao"></property>
+			<property name="daoTT" ref="Transporteurdao"></property> 
+		</bean>
+		<bean class="service.ClientServiceImpl" id="Servicedao6">
+			<property name="dao" ref="Clientdao"></property> 
+		</bean>
+		<bean class="service.PaysServiceImpl" id="Servicedao7">
+			<property name="dao" ref="Paysdao"></property> 
+		</bean>
+		<bean class="service.PortServiceImpl" id="Servicedao8">
+			<property name="dao" ref="Portdao"></property> 
+		</bean>
+		<bean class="service.MoyennetransportServiceImpl" id="Servicedao9" >
+			<property name="dao" ref="Moyennetransportdao"></property> 
+		</bean>
+		<bean class="service.EtatServiceImpl" id="Servicedao10" >
+			<property name="dao" ref="Etatdao"></property> 
+		</bean>
+		<bean class="service.CommentServiceImpl" id="Servicedao11" >
+			<property name="dao" ref="CommentDao"></property>
+		</bean>
+	
+		<!-- ********************** -->
+		<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="find*" read-only="true" />
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+	
+
+	<aop:config>
+		<aop:pointcut id="userServicePointCut" expression="execution(* com.mkyong.users.service.*Service.*(..))" />
+		<aop:pointcut id="pfe" expression="execution(* dao.*Impl.*(..))" />
+		<aop:pointcut id="dao" expression="execution(* service.*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="userServicePointCut" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="pfe" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="dao" />
+	</aop:config>
+
+</beans>

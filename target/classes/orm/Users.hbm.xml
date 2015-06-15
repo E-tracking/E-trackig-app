@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.mkyong.users.model.User" table="users" catalog="test">
+        <id name="username" type="string">
+            <column name="username" length="45" />
+            <generator class="assigned" />
+        </id>
+        <property name="password" type="string">
+            <column name="password" length="60" not-null="true" />
+        </property>
+        <property name="userId" type="java.lang.Integer">
+            <column name="user_id" not-null="true" />
+        </property>
+        <property name="enabled" type="boolean">
+            <column name="enabled" not-null="true" />
+        </property>
+        <property name="emailuser" type="string">
+            <column name="EMAILUSER" length="30" not-null="true" />
+        </property>
+        <property name="nomuser" type="string">
+            <column name="NOMUSER" length="15" not-null="true" />
+        </property>
+        <property name="phoneuser" type="string">
+            <column name="PHONEUSER" length="15" not-null="true" />
+        </property>
+        <property name="prenomuser" type="string">
+            <column name="PRENOMUSER" length="15" not-null="true" />
+        </property>
+        <set name="userRole" table="user_roles" cascade="delete" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="username" length="45" not-null="true" />
+            </key>
+            <one-to-many class="com.mkyong.users.model.UserRole" />
+        </set>
+        <set name="etats" table="Etat" cascade="delete" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idUser" length="45" not-null="true" />
+            </key>
+            <one-to-many class="dao.Etat" />
+        </set>
+    </class>
+</hibernate-mapping>

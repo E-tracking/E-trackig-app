@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="dao.Pays" table="pays" catalog="test">
+        <id name="idpays" type="java.lang.Integer">
+            <column name="IDPAYS" />
+            <generator class="identity" />
+        </id>
+        <property name="paysport" type="string">
+            <column name="PAYSPORT" length="15" not-null="true" />
+        </property>
+        <set name="ports" table="port" cascade="persist" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDPAYS" not-null="true" />
+            </key>
+            <one-to-many class="dao.Port" />
+        </set>
+    </class>
+</hibernate-mapping>

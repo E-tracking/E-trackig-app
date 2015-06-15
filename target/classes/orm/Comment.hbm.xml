@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="dao.Comment" table="comment" catalog="test">
+        <id name="id" type="java.lang.Integer">
+            <column name="IDCOMMENT" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="dossier" class="dao.Dossier" fetch="select">
+            <column name="IDDOSSIER" />
+        </many-to-one>
+        <many-to-one name="user" class="com.mkyong.users.model.User" fetch="select">
+            <column name="IDUSER" />
+        </many-to-one>
+        
+        <property name="date" type="timestamp">
+            <column name="DATE" not-null="true" />
+        </property>
+        <property name="commentaire" type="string">
+            <column name="COMMENT" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="dao.Port" table="port" catalog="test">
+        <id name="idport" type="java.lang.Integer">
+            <column name="IDPORT" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="pays" class="dao.Pays" fetch="select">
+            <column name="IDPAYS" not-null="true" />
+        </many-to-one>
+        <property name="nomport" type="string">
+            <column name="NOMPORT" length="20" not-null="true" />
+        </property>
+        <set name="dossiersForPorIdport" table="dossier" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="POR_IDPORT" />
+            </key>
+            <one-to-many class="dao.Dossier" />
+        </set>
+        <set name="dossiersForIdport" table="dossier" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDPORT" />
+            </key>
+            <one-to-many class="dao.Dossier" />
+        </set>
+    </class>
+</hibernate-mapping>

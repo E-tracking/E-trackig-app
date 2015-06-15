@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="dao.Etat" table="Etat" catalog="test">
+    
+        <id name="idEtat" type="java.lang.Integer">
+            <column name="idEtat" />
+            <generator class="identity" />
+        </id>
+        
+        <many-to-one name="user" class="com.mkyong.users.model.User" fetch="select">
+            <column name="idUser" />
+        </many-to-one>
+        
+        <many-to-one name="dossier" class="dao.Dossier" fetch="select">
+            <column name="idDossier" />
+        </many-to-one>
+        
+        <property name="date" type="timestamp">
+            <column name="DATE" not-null="true" />
+        </property>
+        
+        <property name="position" type="string">
+            <column name="POSITION" length="30" not-null="false" default="NULL" />
+        </property>
+        
+        <property name="coordonnee" type="string">
+            <column name="COORDONNEE" length="30" not-null="false" default="NULL" />
+        </property>
+        
+        <property name="typeNotification" type="string">
+            <column name="TYPENOTIFICATION" length="30" not-null="false" default="NULL" />
+        </property>
+       
+       	<property name="luCommercial" type="java.lang.Boolean">
+            <column name="LUCOMMERCIAL" default="false"/>
+        </property>
+        
+       	<property name="luTransit" type="java.lang.Boolean">
+            <column name="LUTRANSIT" default="false"/>
+        </property>
+       	<property name="luTransporteur" type="java.lang.Boolean">
+            <column name="LUTRANSPORTEUR" default="false"/>
+        </property>
+       	<property name="lu" type="java.lang.Boolean">
+            <column name="LU" default="false"/>
+        </property>
+    </class>
+</hibernate-mapping>
