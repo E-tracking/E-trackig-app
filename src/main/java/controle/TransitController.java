@@ -310,7 +310,7 @@ public class TransitController implements Serializable
 	@RequestMapping(value="/Transit/ChangerEtatAction")
 	public String chagerEtatView(Model m,HttpServletRequest req,@RequestParam int idDossier,@RequestParam String etat
 			,@RequestParam String position
-			,@RequestParam String notifier
+			,@RequestParam(defaultValue = "false") String notifier
 			,@RequestParam String emailclient
 			,@RequestParam String coordonnee)
 	{

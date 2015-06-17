@@ -302,7 +302,7 @@ public class TransporteurController implements Serializable
 	@RequestMapping(value="/Transporteur/ChangerEtatAction")
 	public String chagerEtatView(Model m,HttpServletRequest req,@RequestParam int idDossier,@RequestParam String etat
 			,@RequestParam String position
-			,@RequestParam String notifier
+			,@RequestParam(defaultValue = "false") String notifier
 			,@RequestParam String emailclient
 			,@RequestParam String coordonnee)
 	{

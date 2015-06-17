@@ -31,6 +31,7 @@
                     </div>
                    <div class="checkbox">
                       <label>
+                      	<!-- <input type="hidden" name="notifier" value="false"> -->
                         <input type="checkbox" name="notifier" value="true">Notifier le client
                       </label>
                     </div> 
