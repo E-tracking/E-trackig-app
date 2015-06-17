@@ -27,25 +27,29 @@ public class EtatServiceImpl implements EtatService {
 	public List<Etat> getAllchangedEtat(User user,String userType) {
 		List<Etat> etats = dao.getAllEtat();
 		List<Etat> etatList = new ArrayList<Etat>();
-		for (Etat etat : etats) {
-			if(userType.equals("transit")){
-					if (etat.getTypeNotification().equals("changement")
+		for (Etat etat : etats) 
+		{
+			if(userType.equals("transit"))
+			{
+					if ((etat.getTypeNotification().equals("changement") || etat.getTypeNotification().equals("Commentaire"))
 							&& etat.getDossier().getTransit() != null
 							&& etat.getDossier().getTransit().getIdtransit() == user.getUserId()
 							&& !etat.getUser().getUsername().equals(user.getUsername())
 							)
 						etatList.add(etat);
 			}
-			else if(userType.equals("transporteur")){
-				if (etat.getTypeNotification().equals("changement")
+			else if(userType.equals("transporteur"))
+			{
+				if ((etat.getTypeNotification().equals("changement") || etat.getTypeNotification().equals("Commentaire"))
 						&& etat.getDossier().getTransporteur() != null
 						&& etat.getDossier().getTransporteur().getIdtransporteur() == user.getUserId()
 						&& !etat.getUser().getUsername().equals(user.getUsername())
 						)
 					etatList.add(etat);
 			}
-			else{
-				if (etat.getTypeNotification().equals("changement")
+			else
+			{
+				if ((etat.getTypeNotification().equals("changement") || etat.getTypeNotification().equals("Commentaire"))
 						&& etat.getDossier().getCommercial() != null
 						&& etat.getDossier().getCommercial().getIdcommercial() == user.getUserId()
 						&& !etat.getUser().getUsername().equals(user.getUsername())
@@ -64,7 +68,7 @@ public class EtatServiceImpl implements EtatService {
 		int nbr = 0;
 		for (Etat etat : etats) {
 			if(userType.equals("transit")){
-				if (etat.getTypeNotification().equals("changement")
+				if ((etat.getTypeNotification().equals("changement") || etat.getTypeNotification().equals("Commentaire"))
 						&& etat.getDossier().getTransit() != null
 						&& etat.getDossier().getTransit().getIdtransit() == user.getUserId()
 						&& !etat.isLuTransit()
@@ -73,7 +77,7 @@ public class EtatServiceImpl implements EtatService {
 					nbr++;
 			}
 			else if(userType.equals("transporteur")){
-				if (etat.getTypeNotification().equals("changement")
+				if ((etat.getTypeNotification().equals("changement") || etat.getTypeNotification().equals("Commentaire"))
 						&& etat.getDossier().getTransporteur() != null
 						&& etat.getDossier().getTransporteur().getIdtransporteur() == user.getUserId()
 						&& !etat.isLuTransporteur()
@@ -82,7 +86,7 @@ public class EtatServiceImpl implements EtatService {
 					nbr++;
 			}
 			else{
-				if (etat.getTypeNotification().equals("changement")
+				if ((etat.getTypeNotification().equals("changement") || etat.getTypeNotification().equals("Commentaire"))
 						&& etat.getDossier().getCommercial() != null
 						&& etat.getDossier().getCommercial().getIdcommercial() == user.getUserId()
 						&& !etat.isLuCommercial()

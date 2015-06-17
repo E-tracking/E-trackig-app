@@ -412,6 +412,7 @@ public class CommercialController implements Serializable
 		Dossier dossier = (Dossier) serviceD.getDossier(idDossier);
 		Comment cmt = new Comment(comment, new Date(),dossier ,user);
 		serviceCmt.AddComment(cmt);
+		serviceEtat.addEtat(new Etat(new Date(),serviceD.getDossier(idDossier),user,null,null,"Commentaire",false,false,false,false));
 		m.addAttribute("comments",serviceCmt.getCommentbyId(idDossier,user.getUserId()));
 		m.addAttribute("idDossier",idDossier);
 		return "redirect:SingleDossier";
