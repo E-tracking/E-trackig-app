@@ -108,6 +108,15 @@ public class AppController implements Serializable
 		return "whoami";
 	}
 	
+	@RequestMapping(value="/summary")
+	public String Summary(Model m,HttpServletRequest req,HttpServletResponse Response)
+	{
+		m.addAttribute("listeDossiers",serviceD.getAllDossiers());
+		
+		
+		return "Summary";
+	}
+	
 	@RequestMapping(value="/affichage")
 	public String affichage(Model m,HttpServletRequest req)
 	{

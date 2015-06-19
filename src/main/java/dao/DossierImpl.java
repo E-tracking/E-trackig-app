@@ -80,24 +80,10 @@ public class DossierImpl implements DossierDao,Serializable
 	@Override
 	public List<Dossier> getAllDossiers() 
 	{
-		Session session =  getSessionFactory().openSession();
-		List<Dossier> listeDossier = null;
-		try {
-		    session.getTransaction().begin();
-
-		    // do some work
-		    session.createQuery("from Dossier").list();
-		    session.getTransaction().commit();
-		}
-		catch (RuntimeException e) {
-			session.getTransaction().rollback();
-		    throw e;
-		}finally {
-	        if (session.isOpen()) {
-	            session.close();
-	        }
-	    }
-		return listeDossier;
+		List<Dossier> dossiers;
+		Session session =  getSessionFactory().getCurrentSession();
+		dossiers = session.createQuery("from Dossier").list();
+		return dossiers;
 	}
 	
 	@Override
