@@ -195,6 +195,31 @@ function affecter(id)
 
 
 </script>
+
+<script type="text/javascript">
+function to() {
+    document.getElementById( 'to' ).scrollIntoView();    
+};
+
+function bottom() {
+    document.getElementById( 'bottom' ).scrollIntoView();
+    window.setTimeout( function () { to(); }, 2000 );
+};
+
+function pageScroll() {
+    window.scrollBy(0,50);
+    scrolldelay = setTimeout(pageScroll(),500);
+};
+
+$(window).bind("load", function() 
+{
+	//bottom();
+	//pageScroll();
+	//$('html, body').animate({scrollTop:'350px'},'slow');
+	$('body,html').animate({scrollTop: 306}, 3500); 
+});
+</script>
+
 <script>
 
   /* jVector Maps
@@ -232,9 +257,7 @@ function affecter(id)
         stroke: '#111'
       }
     },
-    markers: [
-    ${etatMap}
-    ]
+    markers: [${etatMap}]
   });
 </script>
 

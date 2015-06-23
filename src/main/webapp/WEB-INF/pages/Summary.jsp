@@ -19,6 +19,7 @@
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <div class="table-responsive">
+                  <div id="to">to</div>
                     <table class="table no-margin">
                       <thead>
                         <tr>
@@ -34,6 +35,7 @@
                         </tr>
                       </thead>
                       <tbody>
+                      
                       <c:forEach items="${listeDossiers}" var="l">
 					   		
                         <tr>
@@ -55,12 +57,15 @@
                           	<span class="label label-danger" data-toggle="modal" data-target="#myModal2">
                           		<i data-toggle="tooltip" data-placement="top" title="Supprimer" class="fa fa-trash-o fa-lg" onclick="supDossier(${l.numdossier})"></i>
                           	</span>
+							
                           </td>
                         </tr>
                         
-                      </c:forEach> 
+                      </c:forEach>
+                      
                       </tbody>
                     </table>
+                    <div id="bottom">bottom</div> 
                   </div><!-- /.table-responsive -->
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
