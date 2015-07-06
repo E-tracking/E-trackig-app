@@ -15,6 +15,7 @@ public class User{
 	private String prenomuser;
 	private boolean enabled;
 	private int userId;
+	private String logo;
 	private Set<UserRole> userRole = new HashSet<UserRole>(0);
 	private Set<Etat> etats = new HashSet<Etat>(0);
 
@@ -134,6 +135,14 @@ public class User{
 
 	public void setEtats(Set<Etat> etats) {
 		this.etats = etats;
+	}
+
+	public String getLogo() {
+		return logo;
+	}
+
+	public void setLogo(String logo) {
+		this.logo = logo;
 	}
 
 	

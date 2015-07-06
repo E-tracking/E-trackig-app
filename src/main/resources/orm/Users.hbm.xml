@@ -28,6 +28,9 @@
         <property name="prenomuser" type="string">
             <column name="PRENOMUSER" length="15" not-null="true" />
         </property>
+        <property name="logo" type="string">
+            <column name="logo" length="100" not-null="true" />
+        </property>
         <set name="userRole" table="user_roles" cascade="delete" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="username" length="45" not-null="true" />

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.multipart.MultipartFile;
 
 import service.AdminService;
 import service.ClientService;
@@ -32,6 +33,7 @@ import service.TransitService;
 import service.TransporteurService;
 
 import com.mkyong.users.dao.UserDao;
+import com.mkyong.users.model.FileUpload;
 import com.mkyong.users.model.User;
 
 import dao.Client;
@@ -474,7 +476,33 @@ public class TransporteurController implements Serializable
 		serviceP.addPort(port);
 		return "redirect:dossiersAttente";
 	}
-
+	
+	@RequestMapping(value="/Transporteur/profil")
+	public String Profil(Model m,HttpServletRequest req,Object file) 
+	{
+		HttpSession s=req.getSession();
+		User user=(User) s.getAttribute("user");
+		
+		return "/Transporteur/profil";
+	}
+	
+	@RequestMapping(value="/Transporteur/profilSetting")
+	public String ProfilSetting(Model m,HttpServletRequest req,Object file) 
+	{
+		HttpSession s=req.getSession();
+		User user=(User) s.getAttribute("user");
+		FileUpload filehelp = (FileUpload)file;
+		MultipartFile multipartFile = filehelp.getFile();
+		String fileName="";
+		if(multipartFile!=null)
+		{
+			fileName = multipartFile.getOriginalFilename();
+		}
+		user.setLogo(fileName);
+		userDao.update(user);
+		return "/Transporteur/TransporteurProfil";
+	}
+	
 	public UserDao getUserDao() {
 		return userDao;
 	}

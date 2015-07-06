@@ -216,7 +216,8 @@ $(window).bind("load", function()
 	//bottom();
 	//pageScroll();
 	//$('html, body').animate({scrollTop:'350px'},'slow');
-	$('body,html').animate({scrollTop: 306}, 3500); 
+	$('body,html').animate({scrollTop: 306}, 4000); 
+	$('body,html').animate({scrollTop: 0}, 4000); 
 });
 </script>
 
